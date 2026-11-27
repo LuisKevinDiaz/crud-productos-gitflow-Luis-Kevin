@@ -37,9 +37,11 @@ public class ProductoService
             return;
         }
 
+        Console.WriteLine("\nID  | Nombre               | Precio     | Stock | Fecha de Creación");
+        Console.WriteLine(new string('-', 70));
         foreach (var p in _productos)
         {
-            Console.WriteLine($"[{p.Id}] {p.Nombre} | Precio: ${p.Precio:F2} | Stock: {p.Stock} | Creado: {p.FechaCreacion}");
+            Console.WriteLine($"{p.Id,-3} | {p.Nombre,-20} | ${p.Precio,9:F2} | {p.Stock,5} | {p.FechaCreacion:dd/MM/yyyy HH:mm}");
         }
     }
     public void Actualizar(int id, string nombre, decimal precio, int stock)
