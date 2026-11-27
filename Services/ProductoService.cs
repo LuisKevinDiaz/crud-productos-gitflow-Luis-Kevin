@@ -42,4 +42,33 @@ public class ProductoService
             Console.WriteLine($"[{p.Id}] {p.Nombre} | Precio: ${p.Precio:F2} | Stock: {p.Stock} | Creado: {p.FechaCreacion}");
         }
     }
+    public void Actualizar(int id, string nombre, decimal precio, int stock)
+    {
+        var producto = _productos.FirstOrDefault(p => p.Id == id);
+        if (producto == null)
+        {
+            Console.WriteLine($"No se encontró un producto con ID {id}.");
+            return;
+        }
+
+        producto.Nombre = nombre;
+        producto.Precio = precio;
+        producto.Stock = stock;
+        _archivo.Guardar(_productos);
+        Console.WriteLine($"Producto ID {id} actualizado correctamente.");
+    }
+
+    public void Eliminar(int id)
+    {
+        var producto = _productos.FirstOrDefault(p => p.Id == id);
+        if (producto == null)
+        {
+            Console.WriteLine($"No se encontró un producto con ID {id}.");
+            return;
+        }
+
+        _productos.Remove(producto);
+        _archivo.Guardar(_productos);
+        Console.WriteLine($"Producto ID {id} eliminado correctamente.");
+    }
 }
