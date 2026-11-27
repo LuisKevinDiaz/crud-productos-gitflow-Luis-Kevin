@@ -1,4 +1,5 @@
 ﻿using CrudProductos.Services;
+using CrudProductos.Utils;
 
 namespace CrudProductos;
 
@@ -23,31 +24,23 @@ class Program
             switch (opcion)
             {
                 case "1":
-                    Console.Write("Nombre: ");
-                    string nombre = Console.ReadLine() ?? "";
-                    Console.Write("Precio: ");
-                    decimal precio = decimal.Parse(Console.ReadLine() ?? "0");
-                    Console.Write("Stock: ");
-                    int stock = int.Parse(Console.ReadLine() ?? "0");
+                    string nombre = Validador.LeerTextoObligatorio("Nombre: ");
+                    decimal precio = Validador.LeerDecimalPositivo("Precio: ");
+                    int stock = Validador.LeerEnteroNoNegativo("Stock: ");
                     servicio.Crear(nombre, precio, stock);
                     break;
                 case "2":
                     servicio.Listar();
                     break;
                 case "3":
-                    Console.Write("ID del producto a actualizar: ");
-                    int idAct = int.Parse(Console.ReadLine() ?? "0");
-                    Console.Write("Nuevo nombre: ");
-                    string nuevoNombre = Console.ReadLine() ?? "";
-                    Console.Write("Nuevo precio: ");
-                    decimal nuevoPrecio = decimal.Parse(Console.ReadLine() ?? "0");
-                    Console.Write("Nuevo stock: ");
-                    int nuevoStock = int.Parse(Console.ReadLine() ?? "0");
+                    int idAct = Validador.LeerEnteroNoNegativo("ID del producto a actualizar: ");
+                    string nuevoNombre = Validador.LeerTextoObligatorio("Nuevo nombre: ");
+                    decimal nuevoPrecio = Validador.LeerDecimalPositivo("Nuevo precio: ");
+                    int nuevoStock = Validador.LeerEnteroNoNegativo("Nuevo stock: ");
                     servicio.Actualizar(idAct, nuevoNombre, nuevoPrecio, nuevoStock);
                     break;
                 case "4":
-                    Console.Write("ID del producto a eliminar: ");
-                    int idElim = int.Parse(Console.ReadLine() ?? "0");
+                    int idElim = Validador.LeerEnteroNoNegativo("ID del producto a eliminar: ");
                     servicio.Eliminar(idElim);
                     break;
                 case "0":
